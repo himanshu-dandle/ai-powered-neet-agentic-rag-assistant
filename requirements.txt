@@ -1,0 +1,27 @@
+# UI
+streamlit
+
+# Env / settings
+python-dotenv
+pydantic-settings
+
+# LLM + orchestration (agentic)
+langchain
+langchain-community
+langchain-openai
+langgraph
+
+# Vector DB (local, persistent)
+chromadb
+
+# Embeddings
+sentence-transformers
+
+# PDF ingestion
+pypdf
+
+# Token utilities
+tiktoken
+
+# Reliability
+tenacity

@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Virtual env
+.venv/
+
+# Env secrets
+.env
+
+# OS / IDE
+.DS_Store
+.vscode/
+*.log
+
+# Vector DB (DO NOT COMMIT)
+data/chroma/
+data/chroma/**
+
+# Logs
+logs/

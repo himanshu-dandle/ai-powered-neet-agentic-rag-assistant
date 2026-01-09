@@ -181,4 +181,4 @@ A LangGraph-based workflow with clearly separated responsibilities:
     GitHub: https://github.com/himanshu-dandle
 
 ## License
-    MITgit status
+    MIT

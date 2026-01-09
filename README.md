@@ -162,18 +162,19 @@ A LangGraph-based workflow with clearly separated responsibilities:
 
 ## Example Queries
 
-Explain Newton's second law in simple terms
-Generate 5 MCQs on Newton laws with difficulty
-Give exam-style solution for work-energy theorem
-Explain momentum conservation for NEET
+
+- Explain Newton's second law in simple terms
+- Generate 5 MCQs on Newton laws with difficulty
+- Give exam-style solution for work-energy theorem
+- Explain momentum conservation for NEET
 
 ## What This Demonstrates (for Toptal)
 
-Agentic AI design (not prompt-only)
-Production-safe RAG
-Verification & governance
-Clear system thinking
-Strong Python + GenAI engineering
+- Agentic AI design (not prompt-only)
+- Production-safe RAG
+- Verification & governance
+- Clear system thinking
+- Strong Python + GenAI engineering
 
 ## Author
     Himanshu Dandle

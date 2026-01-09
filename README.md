@@ -1,181 +1,183 @@
-# AgenticRAG StudyCoach 📚🤖
+# AI-powered NEET Exam Preparation – Agentic RAG Assistant
 
-AgenticRAG StudyCoach is an **agentic Retrieval-Augmented Generation (RAG)** based learning assistant designed to help students and learners understand concepts, answer exam-style questions, and generate MCQs — **strictly grounded in source documents with verification**.
+A **production-grade Agentic Retrieval-Augmented Generation (RAG) system** built for **NEET Physics exam preparation**.  
+The system delivers **concept explanations, exam-style answers, and MCQ generation**, strictly grounded in NCERT/NEET source PDFs with **automatic verification and citation enforcement**.
 
-This project demonstrates **agentic AI design**, multi-step reasoning, source-grounded answering, and verification-driven retries using **LangGraph**.
+This project demonstrates **real-world GenAI architecture**, not a toy LLM demo.
 
 ---
 
-## 🚀 Key Features
+## Why This Project Matters 
 
-### 🔹 Concept Explanation
-- Explains physics concepts clearly and simply
-- Answers are **strictly grounded in retrieved documents**
-- Every paragraph includes **citations** like `[S1]`, `[S2]`
+Most GenAI demos stop at *“upload PDF → ask LLM”*.  
+This project goes further by implementing:
 
-### 🔹 Exam-style Q&A
-- Structured, exam-ready answers
-- Step-by-step reasoning
-- No hallucinated content
+- Multi-agent orchestration
+- Verification-driven retries
+- Persistent vector search
+- Hallucination control
+- Transparent AI decision-making
 
-### 🔹 MCQ Generator
+This is the **same architectural pattern used in enterprise AI assistants**, EdTech platforms, and regulated-domain RAG systems.
+
+---
+
+## Core Capabilities
+
+### 1. Agentic RAG Pipeline
+A LangGraph-based workflow with clearly separated responsibilities:
+
+- **QueryRouterAgent** – understands user intent (concept, exam Q&A, MCQ)
+- **RetrievalAgent** – semantic search over vectorized PDFs
+- **AnswerAgent** – generates grounded responses with citations
+- **VerificationAgent** – checks factual support and enforces retry if needed
+
+---
+
+### 2. Strict Source Grounding
+- Answers and MCQs are generated **only from retrieved chunks**
+- Mandatory citations like `[S1]`, `[S2]`
+- Unsupported claims are penalized
+- Automatic revision if citations are missing
+
+---
+
+### 3. NEET-style MCQ Generator
 - Generates **exactly 5 MCQs**
 - 4 options per question (A–D)
-- Includes:
-  - Correct answer
-  - Difficulty level (Easy / Medium / Hard)
-  - Citations per MCQ
-
-### 🔹 Verification Agent
-- Automatically checks:
-  - Missing citations
-  - Unsupported claims
-- Assigns a **verification score (0–1)**
-- Triggers **retry with broader retrieval** if needed
+- Difficulty tagging: Easy / Medium / Hard
+- Each MCQ grounded to source PDFs
 
 ---
 
-## 🧠 Agentic Architecture
+### 4. Persistent Vector Database
+- **ChromaDB** with disk persistence
+- Idempotent ingestion
+- Deterministic semantic retrieval
+- Supports filtering and retry with broader scope
 
-This system is built using **LangGraph**, where each agent has a clear responsibility:
+---
 
-User Query
-↓
-QueryRouterAgent
-↓
-RetrievalAgent (ChromaDB)
-↓
-AnswerAgent
-↓
-VerificationAgent
-↓
-(Optional retry with broader scope)
+### 5. Verification-Driven Retry Loop
+- Each answer is scored (0–1)
+- If score < threshold → automatic retry
+- Retrieval scope widens on retry
+- Prevents hallucinations and weak grounding
+
+---
+
+### 6. Transparent UI
+- Streamlit interface
+- Shows:
+  - Final answer
+  - Source chunks
+  - Agent decision steps
+  - Verification score & notes
+
+---
+
+## Architecture Overview
+
+    User Query
+    ↓
+    QueryRouterAgent
+    ↓
+    RetrievalAgent (ChromaDB)
+    ↓
+    AnswerAgent (LLM + citations)
+    ↓
+    VerificationAgent
+    ↓
+    (Optional retry with broader retrieval)
+
+
+    Clean separation of:
+    - Ingestion vs Query
+    - Reasoning vs Verification
+    - Generation vs Validation
+
+
+## Tech Stack
+
+- **Language:** Python 3.10+
+- **LLM:** OpenAI (gpt-4o-mini)
+- **Embeddings:** sentence-transformers / all-MiniLM-L6-v2
+- **Vector DB:** Chroma (persistent)
+- **Agent Framework:** LangGraph
+- **UI:** Streamlit
+- **PDF Processing:** LangChain loaders
+
+---
+
+## Project Structure
+
+    app/
+    ├── agents/
+    │ ├── query_router.py
+    │ ├── retrieval_agent.py
+    │ ├── answer_agent.py
+    │ └── verification_agent.py
+    ├── core/
+    │ ├── graph.py
+    │ ├── state.py
+    │ └── agent_logger.py
+    ├── ingestion/
+    │ ├── pdf_loader.py
+    │ ├── chunker.py
+    │ └── embedder.py
+    ├── utils/
+    │ └── config.py
+    ├── ui/
+    │ └── streamlit_app.py
+    data/
+    ├── raw_pdfs/
+    │ └── NEET Physics source PDFs
+    requirements.txt
+    README.md
 
 
 ---
 
-## 🧩 Agents Overview
+## How to Run Locally
 
-| Agent | Responsibility |
-|------|---------------|
-| QueryRouterAgent | Determines intent (concept, exam, MCQ) |
-| RetrievalAgent | Fetches relevant chunks from ChromaDB |
-| AnswerAgent | Generates grounded answers with citations |
-| VerificationAgent | Verifies factual grounding & citations |
+### 1. Clone
+    git clone https://github.com/himanshu-dandle/ai-powered-neet-agentic-rag-assistant.git
+    cd ai-powered-neet-agentic-rag-assistant
 
----
-
-## 🛠️ Tech Stack
-
-- **Python 3.10+**
-- **LangGraph**
-- **LangChain**
-- **ChromaDB (persistent)**
-- **Sentence Transformers** (`all-MiniLM-L6-v2`)
-- **OpenAI GPT-4o-mini**
-- **Streamlit** (UI)
-
----
-
-## 📂 Project Structure
-
-AgenticRAG-StudyCoach/
-│
-├── app/
-│ ├── agents/
-│ │ ├── query_router.py
-│ │ ├── retrieval_agent.py
-│ │ ├── answer_agent.py
-│ │ └── verification_agent.py
-│ │
-│ ├── core/
-│ │ ├── graph.py
-│ │ ├── state.py
-│ │ └── agent_logger.py
-│ │
-│ └── utils/
-│ └── config.py
-│
-├── data/
-│ └── chroma/ # Persistent vector store
-│
-├── streamlit.py
-├── requirements.txt
-└── README.md
-
-
-
----
-
-## ▶️ How to Run
-
-### 1️⃣ Create virtual environment
+### 2. Environment Setup
 
     python -m venv .venv
-    source .venv/bin/activate  # Windows: .venv\Scripts\activate
-
-### 2️⃣ Install dependencies
-
+    .venv\Scripts\activate
     pip install -r requirements.txt
+### 3. API Key
+    Create .env:
+        OPENAI_API_KEY=your_key_here
 
-### 3️⃣ Set environment variables
+### 4. Ingest PDFs (one-time)
+    python test_chroma.py
 
-    Create a .env file and below test
-        OPENAI_API_KEY=your_api_key_here
+### 5. Launch UI
+    streamlit run streamlit_app.py
 
-### 4️⃣ Run the app
 
-    streamlit run streamlit.py
+## Example Queries
 
-## 🎛️ Streamlit Controls
+--Explain Newton's second law in simple terms
+--Generate 5 MCQs on Newton laws with difficulty
+--Give exam-style solution for work-energy theorem
+--Explain momentum conservation for NEET
 
-    🔹Mode
-        -Auto (Agent decides)
-        -Concept Explanation
-        -Exam-style Q&A
-        -MCQ Generator
+## What This Demonstrates (for Toptal)
 
-    🔹Max Iterations
-        -Controls verification-driven retries
+--Agentic AI design (not prompt-only)
+--Production-safe RAG
+--Verification & governance
+--Clear system thinking
+--Strong Python + GenAI engineering
 
-    🔹Live Agent Step Trace
-        -See how each agent reasons
+## Author
+    Himanshu Dandle
+    GitHub: https://github.com/himanshu-dandle
 
-## 📊 Example Output
-    🔹MCQ Generation
-        -Question + options
-        -Correct answer
-        -Difficulty tag
-        -Source citation per MCQ
-
-    🔹Verification
-
-        -Score (e.g., 0.85)
-        -Notes explaining any issues
-        -Retry decision
-
-## 🎯 Why This Project Matters
-
-This project demonstrates:
-
-🔹True agentic AI design
-🔹Grounded RAG (no hallucinations)
-🔹Verification-driven workflows
-🔹Education-focused AI use case
-
-Ideal for:
-
-🔹AI Engineer portfolios
-🔹GenAI interviews
-🔹Agentic AI demonstrations
-
-## 📌 Future Enhancements
-
-🔹 PDF upload support
-🔹 Per-question verification
-🔹 Export MCQs to PDF / CSV
-🔹 Difficulty calibration using metadata
-🔹 Multi-subject support
-
-## 👨‍💻 Author
- Himanshu Dandle
+## License
+    MIT

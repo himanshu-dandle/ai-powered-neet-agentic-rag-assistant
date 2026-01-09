@@ -168,7 +168,7 @@ A LangGraph-based workflow with clearly separated responsibilities:
 - Give exam-style solution for work-energy theorem
 - Explain momentum conservation for NEET
 
-## What This Demonstrates (for Toptal)
+## What This Demonstrates
 
 - Agentic AI design (not prompt-only)
 - Production-safe RAG

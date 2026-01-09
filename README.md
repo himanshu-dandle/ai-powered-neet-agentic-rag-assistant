@@ -6,6 +6,33 @@ The system delivers **concept explanations, exam-style answers, and MCQ generati
 This project demonstrates **real-world GenAI architecture**, not a toy LLM demo.
 
 ---
+## 🚀 Demo Screenshots
+### 🖥️ Application Overview
+AgenticRAG StudyCoach provides an interactive UI to control agent behavior, verification retries, and LLM settings.
+
+![App Overview](screenshots/01_app_overview.png)
+
+---
+
+### 🧠 Concept Explanation with Agent Reasoning
+The system routes the query, retrieves relevant content, generates a grounded answer, and verifies it against sources.
+
+![Concept Agent Flow](screenshots/02_concept_agent_flow.png)
+
+---
+
+### 📝 MCQ Generation with Difficulty Tagging
+The agent dynamically generates NEET-style MCQs with difficulty levels and source-backed citations.
+
+![MCQ Generation](screenshots/03_mcq_generation.png)
+
+---
+
+### 🔎 Source Grounding & Hallucination Control
+Every answer is traceable to original source documents, ensuring factual correctness.
+
+![Source Grounding](screenshots/04_source_grounding.png)
+
 
 ## Why This Project Matters 
 
